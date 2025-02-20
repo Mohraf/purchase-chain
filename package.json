@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prebuild": "prisma generate",
     "postinstall": "prisma generate",
     "dev": "next dev",
     "build": "rm -rf .next && rm -rf node_modules/.prisma && prisma generate && next build",
