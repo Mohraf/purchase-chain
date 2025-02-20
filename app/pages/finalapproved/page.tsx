@@ -2,10 +2,12 @@
 import { useState, useEffect } from "react";
 import LpoDetails from "@/components/Lpo/LpoDetails";
 import Header from "@/components/Header/Header";
-import { Lpo } from "@/types/models";
+import { Lpo, Site, Supplier } from "@/types/models";
 
 const Page = () => {
   const [lpos, setLpos] = useState<Lpo[]>([]);
+  const [sites, setSites] = useState<Site[]>([]);
+  const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [selectedLpo, setSelectedLpo] = useState<Lpo | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -13,7 +15,13 @@ const Page = () => {
     Promise.all([
       fetch("/api/finalapprovedlpos")
         .then((res) => res.json())
-        .then(data => setLpos(Array.isArray(data) ? data : [])),
+        .then((data) => setLpos(Array.isArray(data) ? data : [])),
+      fetch("/api/sites")
+        .then((res) => res.json())
+        .then((data) => setSites(Array.isArray(data) ? data : [])),
+      fetch("/api/suppliers")
+        .then((res) => res.json())
+        .then((data) => setSuppliers(Array.isArray(data) ? data : [])),
     ])
       .catch((err) => console.error("Failed to fetch data", err))
       .finally(() => setLoading(false));
@@ -107,7 +115,12 @@ const Page = () => {
         </div>
 
         {selectedLpo && (
-          <LpoDetails lpo={selectedLpo} onClose={() => setSelectedLpo(null)} />
+          <LpoDetails
+            lpo={selectedLpo}
+            suppliers={suppliers}
+            sites={sites}
+            onClose={() => setSelectedLpo(null)}
+          />
         )}
       </div>
     </div>
