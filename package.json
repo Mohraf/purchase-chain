@@ -6,7 +6,7 @@
     "prebuild": "prisma generate",
     "postinstall": "prisma generate",
     "dev": "next dev",
-    "build": "rm -rf .next && rm -rf node_modules/.prisma && prisma generate && next build",
+    "build": "npx prisma db push && npx prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
