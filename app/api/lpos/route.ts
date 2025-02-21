@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
-import prisma from "@/lib/prisma";
+import {prisma} from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 import { SupplyItem } from "@/types/models";
 
