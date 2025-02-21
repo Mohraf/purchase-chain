@@ -62,18 +62,18 @@ export default function Dashboard() {
         <Header />
 
         <div className="flex h-full overflow-auto items-start">
-          <div className="w-2/3 px-6 py-4 flex">
-            <div className="p-4 shadow-md rounded-lg bg-gray-100 m-2 flex text-center items-center justify-between w-1/3 h-auto">
+          <div className="w-2/3 px-2 py-4 flex md:flex-row flex-col">
+            <div className="p-4 shadow-md rounded-lg bg-gray-100 mb-2 flex text-center items-center justify-between md:w-1/3 w-full h-auto">
               <h2 className="text-orange-600 text-xl font-semibold">Companies</h2>
               <p className="text-green-600 font-extrabold text-lg">{companies.length}</p>
             </div>
 
-            <div className="p-4 shadow-md rounded-lg bg-gray-100 m-2 flex text-center items-center justify-between w-1/3 h-auto">
+            <div className="p-4 shadow-md rounded-lg bg-gray-100 mb-2 flex text-center items-center justify-between md:w-1/3 w-full h-auto">
               <h2 className="text-orange-600 text-xl font-semibold">Company Sites</h2>
               <p className="text-green-600 font-extrabold text-lg">{sites.length}</p>
             </div>
 
-            <div className="p-4 shadow-md rounded-lg bg-gray-100 m-2 flex text-center items-center justify-between w-1/3 h-auto">
+            <div className="p-4 shadow-md rounded-lg bg-gray-100 mb-2 flex text-center items-center justify-between md:w-1/3 w-full h-auto">
               <h2 className="text-orange-600 text-xl font-semibold">Suppliers</h2>
               <p className="text-green-600 font-extrabold text-lg">{suppliers.length}</p>
             </div>
