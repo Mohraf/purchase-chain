@@ -1,8 +1,8 @@
 "use client";
-
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const navItems = [
   { name: "Dashboard", href: "/pages/dashboard" },
@@ -28,6 +28,15 @@ export default function Sidebar() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [sidebarRef]);
+
+  const pathname = usePathname();
+
+  const isActive = (path: string) => {
+    if (path === "/") {
+      return pathname === path;
+    }
+    return pathname?.startsWith(path);
+  };
 
   return (
     <div className="h-screen">
@@ -57,7 +66,7 @@ export default function Sidebar() {
               <li key={item.href} className="mb-4">
                 <Link
                   href={item.href}
-                  className="block px-4 py-2 rounded hover:bg-[#0003ad]"
+                  className={`block px-4 py-2 rounded ${pathname === item.href ? 'bg-[#0003ad]' : 'hover:bg-[#0003ad]'}`}
                 >
                   {item.name}
                 </Link>

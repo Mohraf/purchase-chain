@@ -29,7 +29,6 @@ const LpoTable = ({
 
   useEffect(() => {
     setLoading(true);
-    console.log(lpos);
     const data = lpos.filter(
       (lpo) =>
         (lpo.lpoNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
