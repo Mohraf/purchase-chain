@@ -62,11 +62,49 @@ export default function Dashboard() {
 
   return (
     <ClientSession>
-      <div className="container mx-auto h-screen overflow-hidden">
+      <div className="container mx-auto h-full">
         <Header />
 
-        <div className="flex h-full overflow-auto items-start flex-col">
-          <div className="w-full px-2 py-4 flex md:flex-row flex-col">
+        <div className="flex px-4 items-start flex-col">
+          <div className="w-full flex md:flex-row flex-col">
+            <Dialog>
+              <DialogTrigger asChild className="m-1">
+                <button className="bg-gray-300 text-base text-black px-4 py-2 rounded-full hover:bg-gray-500 shadow-md">
+                  Register a new company
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogTitle>New Company Posting</DialogTitle>
+                <CompanyForm />
+              </DialogContent>
+            </Dialog>
+
+            <Dialog>
+              <DialogTrigger asChild className="m-1">
+                <button className="bg-gray-300 text-base text-black px-4 py-2 rounded-full hover:bg-gray-500 shadow-md">
+                  Register a new site
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogTitle>New Company Site Posting</DialogTitle>
+                <AddSiteForm companies={companies} />
+              </DialogContent>
+            </Dialog>
+
+            <Dialog>
+              <DialogTrigger asChild className="m-1">
+                <button className="bg-gray-300 text-base text-black px-4 py-2 rounded-full hover:bg-gray-500 shadow-md">
+                  Register a new supplier
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogTitle>New Supplier Posting</DialogTitle>
+                <AddSupplierForm />
+              </DialogContent>
+            </Dialog>
+          </div>
+
+          <div className="w-full px-2 py-4 flex md:flex-row md:space-x-6 flex-col">
             <div className="p-4 shadow-md rounded-lg bg-gray-100 mb-2 flex text-center items-center justify-between md:w-1/3 w-full h-auto">
               <h2 className="text-orange-600 text-xl font-semibold">
                 Companies
@@ -93,44 +131,6 @@ export default function Dashboard() {
                 {suppliers.length}
               </p>
             </div>
-          </div>
-
-          <div className="w-full">
-            <Dialog>
-              <DialogTrigger asChild className="m-1">
-                <button className="bg-gray-500 text-base text-white px-4 py-2 rounded-full hover:bg-gray-400">
-                  Register a new company
-                </button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
-                <DialogTitle>New Company Posting</DialogTitle>
-                <CompanyForm />
-              </DialogContent>
-            </Dialog>
-
-            <Dialog>
-              <DialogTrigger asChild className="m-1">
-                <button className="bg-gray-500 text-base text-white px-4 py-2 rounded-full hover:bg-gray-400">
-                  Register a new site
-                </button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
-                <DialogTitle>New Company Site Posting</DialogTitle>
-                <AddSiteForm companies={companies} />
-              </DialogContent>
-            </Dialog>
-
-            <Dialog>
-              <DialogTrigger asChild className="m-1">
-                <button className="bg-gray-500 text-base text-white px-4 py-2 rounded-full hover:bg-gray-400">
-                  Register a new supplier
-                </button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
-                <DialogTitle>New Supplier Posting</DialogTitle>
-                <AddSupplierForm />
-              </DialogContent>
-            </Dialog>
           </div>
         </div>
       </div>
