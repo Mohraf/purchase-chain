@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
@@ -14,9 +14,23 @@ const navItems = [
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const sidebarRef = useRef<HTMLDivElement>(null); // Create a ref for the sidebar
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+        setIsOpen(false); // Close sidebar if clicked outside
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [sidebarRef]);
 
   return (
-    <div className="min-h-screen">
+    <div className="h-screen">
       {/* Toggle Button - Always Visible on Small Screens */}
       <button
         className="fixed top-4 left-4 z-50 p-2 bg-[#004aad] text-white rounded-md md:hidden"
@@ -28,6 +42,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
+        ref={sidebarRef}
         className={`fixed inset-y-0 min-h-screen left-0 bg-[#004aad] text-white w-64 p-5 transform transition-transform duration-300 md:relative md:translate-x-0 
         ${isOpen ? "translate-x-0" : "-translate-x-full"} md:flex md:flex-col`}
       >
