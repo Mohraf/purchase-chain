@@ -6,6 +6,12 @@ export type SupplyItem = {
     unit: string; // Ensure unit is included
 }
 
+export type User = {
+    id: number;
+    firstName: string;
+    lastName: string;
+}
+
 export type Lpo = {
     id: number;
     lpoNumber: string;
@@ -19,11 +25,15 @@ export type Lpo = {
     remarks: string;
     createdAt: string;
     firstApproverId: number;
+    firstApprover: User;
     secondApproverId: number;
+    secondApprover: User;
     finalApproverId: number;
+    finalApprover: User;
     rejected: string;
     site: { id: number; name: string };
     supplyItems: SupplyItem[];
+    createdBy: User;
 }
 
 export type Site = {

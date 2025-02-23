@@ -1,6 +1,6 @@
 "use client";
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -11,6 +11,7 @@ import {
 } from "../ui/dialog";
 import { EditLpoForm } from "../LpoPostingForm/EditLpoForm";
 import { Lpo, Site, Supplier, SupplyItem } from "@/types/models";
+import LpoPrint from "./LpoPrint";
 
 interface LpoDetailsProps {
   lpo: Lpo;
@@ -96,6 +97,74 @@ const LpoDetails: React.FC<LpoDetailsProps> = ({
   };
 
   const approvalButtonText = getApprovalButtonText();
+
+  const printRef = useRef<HTMLDivElement>(null);
+
+  const handlePrint = () => {
+    if (printRef.current) {
+      const printContents = printRef.current.innerHTML;
+      const printWindow = window.open("", "_blank");
+      if (printWindow) {
+        printWindow.document.write(`
+          <html>
+            <head>
+              <title>Print LPO</title>
+              <style>
+                @media print {
+                  body {
+                    font-family: Arial, sans-serif;
+                    color: #333;
+                  }
+                  .print-container {
+                    width: 100%;
+                    max-width: 800px;
+                    margin: auto;
+                  }
+                  .header {
+                    text-align: center;
+                    margin-bottom: 20px;
+                  }
+                  .table {
+                    width: 100%;
+                    border-collapse: collapse;
+                  }
+                  .table th, .table td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                  }
+                  .table th {
+                    background-color: #f4f4f4;
+                  }
+                  .no-print {
+                    display: none;
+                  }
+                    .flex {
+                    display: flex;
+                    justify-content: flex-end; // Aligns content to the right
+                  }
+                    .img {
+                    background: url('/purchaseChain.png');
+                    display: block; // Ensures the image is displayed in print
+                    margin: 0 auto; // Centers the image
+                  }
+                }
+              </style>
+            </head>
+            <body>
+              <div class="print-container">
+                ${printContents}
+              </div>
+              <script>
+                window.print();
+                window.onafterprint = () => window.close();
+              </script>
+            </body>
+          </html>
+        `);
+        printWindow.document.close();
+      }
+    }
+  };
 
   return (
     <div className="fixed top-0 right-0 h-full md:w-1/3 w-5/6 bg-white shadow-lg p-8 overflow-y-auto z-50 transition-transform transform translate-x-0">
@@ -215,6 +284,19 @@ const LpoDetails: React.FC<LpoDetailsProps> = ({
             </button>
           </div>
         )}
+
+        {/* Print Button */}
+      <button
+        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+        onClick={handlePrint}
+      >
+        Print LPO
+      </button>
+
+      {/* Hidden Print Content */}
+      <div ref={printRef} className="hidden">
+        <LpoPrint lpo={lpo} />
+      </div>
     </div>
   );
 };
