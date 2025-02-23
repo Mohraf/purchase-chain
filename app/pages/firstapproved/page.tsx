@@ -45,7 +45,7 @@ const Page = () => {
   };
 
   return (
-    <div className="container mx-auto h-screen">
+    <div className="container mx-auto h-full">
       <Header />
       <div className="p-6">
         <div className="flex justify-between items-center mb-6">
