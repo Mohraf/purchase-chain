@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import {prisma} from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
 import { SupplyItem } from "@/types/models";
 
 export async function POST(req: Request) {
@@ -16,7 +15,7 @@ export async function POST(req: Request) {
     
     // Validate required fields
     const requiredFields = [
-      'siteId', 'supplierId', 'lpoNumber', 'prNumber',
+      'siteId', 'supplierId', 'prNumber',
       'paymentTerms', 'deliveryTerms', 'vatRate', 'supplyItems', 'remarks'
     ];
     
@@ -36,12 +35,23 @@ export async function POST(req: Request) {
     
     const total = subTotal * (1 + (rawData.vatRate / 100));
 
+    // Fetch the latest Lpo
+    const latestLpo = await prisma.lpo.findFirst({
+      orderBy: { id: 'desc' },
+      select: { lpoNumber: true }
+  });
+
+  // Determine the next lpoNumber
+  const nextLpoNumber = latestLpo ? 
+      String(parseInt(latestLpo.lpoNumber) + 1).padStart(3, '0') : 
+      '001';
+
     const lpo = await prisma.lpo.create({
       data: {
         ...rawData,
         siteId: Number(rawData.siteId),
         supplierId: Number(rawData.supplierId),
-        lpoNumber: rawData.lpoNumber,
+        lpoNumber: nextLpoNumber,
         prNumber: rawData.prNumber,
         paymentTerms: rawData.paymentTerms,
         deliveryTerms: rawData.deliveryTerms,
@@ -81,6 +91,7 @@ export async function GET() {
         include : {
           site: true, // Include site data
           supplier: true,
+          supplyItems: true,
         }
       });
       return NextResponse.json(lpos);
@@ -91,6 +102,7 @@ export async function GET() {
         include: {
           site: true, // Include site data
           supplier: true, // Include supplier data
+          supplyItems: true,
         },
       });
       return NextResponse.json(lpos);

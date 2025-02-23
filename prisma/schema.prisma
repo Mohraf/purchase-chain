@@ -54,11 +54,11 @@ model Lpo {
   id               Int           @id @default(autoincrement())
   site             Site          @relation(fields: [siteId], references: [id])
   siteId           Int
-  lpoNumber        String
+  lpoNumber        String        @unique
   prNumber         String
   paymentTerms     String
   deliveryTerms    String
-  supplyItems      SupplyItem[]
+  supplyItems      SupplyItem[] @relation("LpoSupplyItems")
   subTotal         Float
   vatRate          Float
   total            Float
@@ -90,6 +90,6 @@ model SupplyItem {
   quantity Int
   unit     String
   unitPrice Float
-  lpo      Lpo     @relation(fields: [lpoId], references: [id])
+  lpo      Lpo     @relation("LpoSupplyItems", fields: [lpoId], references: [id])
   lpoId    Int
 }

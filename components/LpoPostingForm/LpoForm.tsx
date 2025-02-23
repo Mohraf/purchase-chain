@@ -15,7 +15,6 @@ const supplyItemSchema = z.object({
 
 const lpoSchema = z.object({
   siteId: z.number().min(1, "Site selection is required"),
-  lpoNumber: z.string().min(1, "LPO number is required"),
   prNumber: z.string().min(1, "PR number is required"),
   paymentTerms: z.string().min(1, "Payment terms are required"),
   deliveryTerms: z.string().min(1, "Delivery terms are required"),
@@ -48,7 +47,6 @@ export function LpoForm({
     resolver: zodResolver(lpoSchema),
     defaultValues: {
       siteId: sites[0]?.id || 1,
-      lpoNumber: "",
       prNumber: "",
       paymentTerms: "",
       deliveryTerms: "",
@@ -161,22 +159,6 @@ export function LpoForm({
           </select>
           {errors.supplierId && (
             <p className="text-red-500 text-sm">{errors.supplierId.message}</p>
-          )}
-        </div>
-
-        {/* LPO Number */}
-        <div>
-          <label htmlFor="lpoNumber" className="block font-semibold">
-            LPO Number
-          </label>
-          <input
-            id="lpoNumber"
-            type="text"
-            {...register("lpoNumber")}
-            className="w-full border px-4 py-2 mt-1 rounded"
-          />
-          {errors.lpoNumber && (
-            <p className="text-red-500 text-sm">{errors.lpoNumber.message}</p>
           )}
         </div>
 

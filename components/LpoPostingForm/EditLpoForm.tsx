@@ -35,12 +35,10 @@ type LpoFormValues = z.infer<typeof lpoSchema>; // Type inference from your sche
 export function EditLpoForm({
   sites,
   suppliers,
-  supplyItems,
   lpo
 }: {
   sites: Site[];
   suppliers: Supplier[];
-  supplyItems: SupplyItem[];
   lpo: Lpo
 }) {
   const {
@@ -59,7 +57,7 @@ export function EditLpoForm({
       supplierId: lpo.supplier.id,
       vatRate: lpo.vatRate,
       remarks: lpo.remarks,
-      supplyItems: supplyItems, // Set default values for existing supply items
+      supplyItems: lpo.supplyItems, // Set default values for existing supply items
     },
   });
 

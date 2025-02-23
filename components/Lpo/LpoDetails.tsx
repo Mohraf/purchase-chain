@@ -1,6 +1,6 @@
 "use client";
 import { X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -12,7 +12,6 @@ import {
 import { EditLpoForm } from "../LpoPostingForm/EditLpoForm";
 import { Lpo, Site, Supplier, SupplyItem } from "@/types/models";
 
-
 interface LpoDetailsProps {
   lpo: Lpo;
   suppliers: Supplier[];
@@ -20,32 +19,19 @@ interface LpoDetailsProps {
   onClose: () => void;
 }
 
-
-const LpoDetails: React.FC<LpoDetailsProps> = ({ lpo, suppliers, sites, onClose }) => {
+const LpoDetails: React.FC<LpoDetailsProps> = ({
+  lpo,
+  suppliers,
+  sites,
+  onClose,
+}) => {
   const { data: session } = useSession();
-  const [supplyItems, setSupplyItems] = useState<SupplyItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [isApproving, setIsApproving] = useState(false);
   const [isRejecting, setIsRejecting] = useState(false);
   const { toast } = useToast();
 
   const userHasApprovalRights =
     session?.user?.role === "APPROVER" || session?.user?.role === "ADMIN";
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(`/api/supplyItems?lpoId=${lpo.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setSupplyItems(data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to get supply items", err);
-        setIsLoading(false);
-      });
-  }, [lpo]);
-
 
   const handleApprove = async () => {
     setIsApproving(true);
@@ -167,17 +153,7 @@ const LpoDetails: React.FC<LpoDetailsProps> = ({ lpo, suppliers, sites, onClose 
             </tr>
           </thead>
           <tbody>
-            {isLoading
-              ? // Skeleton loaders
-                [...Array(3)].map((_, index) => (
-                  <tr key={index} className="border-t animate-pulse">
-                    <td className="p-3 border bg-gray-300 h-6 w-24"></td>
-                    <td className="p-3 border bg-gray-300 h-6 w-16"></td>
-                    <td className="p-3 border bg-gray-300 h-6 w-20"></td>
-                    <td className="p-3 border bg-gray-300 h-6 w-20"></td>
-                  </tr>
-                ))
-              : supplyItems.map((item: SupplyItem) => (
+            {lpo.supplyItems.map((item: SupplyItem) => (
                   <tr
                     key={item.id}
                     className="border-t hover:bg-gray-100 transition-colors duration-200"
@@ -189,7 +165,7 @@ const LpoDetails: React.FC<LpoDetailsProps> = ({ lpo, suppliers, sites, onClose 
                       {(item.quantity * item.unitPrice).toFixed(2)}
                     </td>
                   </tr>
-                ))} 
+                ))}
           </tbody>
         </table>
       </div>
@@ -210,7 +186,6 @@ const LpoDetails: React.FC<LpoDetailsProps> = ({ lpo, suppliers, sites, onClose 
               <EditLpoForm
                 sites={sites}
                 suppliers={suppliers}
-                supplyItems={supplyItems}
                 lpo={lpo} // Pass the LPO with supply items
               />
             </DialogContent>
