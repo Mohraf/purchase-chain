@@ -14,7 +14,7 @@ const Layout = ({
         <Sidebar />
 
         {/* Main Content */}
-        <div className="flex-1 p-6 bg-gray-100 w-full">
+        <div className="p-6 bg-gray-100 w-full">
           {/* Page Content */}
             {children}
         </div>

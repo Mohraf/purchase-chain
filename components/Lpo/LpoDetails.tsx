@@ -98,7 +98,7 @@ const LpoDetails: React.FC<LpoDetailsProps> = ({
   const approvalButtonText = getApprovalButtonText();
 
   return (
-    <div className="fixed top-0 right-0 h-full w-1/3 bg-white shadow-lg p-8 overflow-y-auto z-50 transition-transform transform translate-x-0">
+    <div className="fixed top-0 right-0 h-full md:w-1/3 w-5/6 bg-white shadow-lg p-8 overflow-y-auto z-50 transition-transform transform translate-x-0">
       <button
         className="absolute top-4 right-4 text-gray-600 hover:text-black transition-colors duration-200"
         onClick={onClose}
@@ -142,7 +142,7 @@ const LpoDetails: React.FC<LpoDetailsProps> = ({
       <p className="text-base font-normal">{lpo.remarks}</p>
 
       <h3 className="text-lg font-bold mt-6">Supply Items</h3>
-      <div className="mt-4">
+      <div className="mt-4 overflow-x-auto">
         <table className="w-full border-collapse bg-gray-50 shadow-md rounded-lg overflow-hidden">
           <thead>
             <tr className="bg-gray-200">

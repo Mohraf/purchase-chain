@@ -85,6 +85,7 @@ const LpoTable = ({
         </select>
       </div>
 
+    <div className="overflow-x-auto">
       <table className="min-w-full border-collapse">
         <thead>
           <tr className="bg-gray-100 text-left">
@@ -147,6 +148,7 @@ const LpoTable = ({
           )}
         </tbody>
       </table>
+    </div>
       {selectedLpo && (
           <LpoDetails 
             lpo={selectedLpo} 

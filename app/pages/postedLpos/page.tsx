@@ -70,8 +70,12 @@ export default function PostedLposPage() {
           </Dialog>
         </div>
 
-        <div className="overflow-x-auto bg-white shadow-md rounded-lg">
-          <LpoTable lposprops={lpos} suppliers={suppliers} sites={sites} />
+        <div className="bg-white shadow-md rounded-lg">
+          {loading ? "Loading..." :
+            (
+              <LpoTable lposprops={lpos} suppliers={suppliers} sites={sites} />
+            )
+          }
         </div>
         {selectedLpo && (
           <LpoDetails

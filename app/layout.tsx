@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased flex h-screen`}
+        className={`antialiased flex-1 h-screen`}
         suppressHydrationWarning
       >
         <main className="flex-1">{children}</main>

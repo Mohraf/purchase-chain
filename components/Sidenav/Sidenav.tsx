@@ -33,7 +33,7 @@ export default function Sidebar() {
     <div className="h-screen">
       {/* Toggle Button - Always Visible on Small Screens */}
       <button
-        className="fixed top-4 left-4 z-50 p-2 bg-[#004aad] text-white rounded-md md:hidden"
+        className="fixed top-6 left-1 z-50 p-2 bg-[#004aad] text-white rounded-md md:hidden"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle navigation"
       >
