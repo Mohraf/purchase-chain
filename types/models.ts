@@ -33,6 +33,7 @@ export type Lpo = {
     rejected: string;
     site: { id: number; name: string };
     supplyItems: SupplyItem[];
+    createdById: number;
     createdBy: User;
 }
 

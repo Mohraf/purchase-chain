@@ -11,7 +11,13 @@ const LpoPrint: React.FC<LpoPrintProps> = ({ lpo }) => {
 
   return (
     <div>
-      <Image className="img" src="/purchaseChain.png" alt="logo" height={200} width={200} />
+      <Image
+        className="img"
+        src="/purchaseChain.png"
+        alt="logo"
+        height={200}
+        width={200}
+      />
 
       <div ref={printRef} className="print-container p-6 bg-white">
         <h1 className="header text-xl font-bold">Local Purchase Order</h1>
@@ -54,16 +60,74 @@ const LpoPrint: React.FC<LpoPrintProps> = ({ lpo }) => {
             </p>
           </div>
         </div>
-        
 
-        <h4>Prepared by:</h4>
-        <p>{lpo.createdBy?.firstName}</p>
+        <div className="signage">
+          <div>
+            <h4>Prepared by:</h4>
+            <p>
+              {lpo.createdBy?.firstName} {lpo.createdBy?.lastName}
+            </p>
+          </div>
+          <div>
+            <h4>Signature</h4>
+            <p className="line"></p>
+          </div>
+          <div>
+            <h4>Date</h4>
+            <p className="line"></p>
+          </div>
+        </div>
 
-        <h4>First Approved by:</h4>
-        <p>{lpo.firstApprover?.firstName}</p>
+        <div className="signage">
+          <div>
+            <h4>First Approved by:</h4>
+            <p>
+              {lpo.firstApprover?.firstName} {lpo.firstApprover?.lastName}
+            </p>
+          </div>
+          <div>
+            <h4>Signature</h4>
+            <p className="line"></p>
+          </div>
+          <div>
+            <h4>Date</h4>
+            <p className="line"></p>
+          </div>
+        </div>
 
-        <h4>Final Approved by:</h4>
-        <p>{lpo.secondApprover?.firstName}</p>
+        {/* <div className="signage">
+          <div>
+            <h4>Second Approved by:</h4>
+            <p>
+              {lpo.secondApprover?.firstName} {lpo.secondApprover?.lastName}
+            </p>
+          </div>
+          <div>
+            <h4>Signature</h4>
+            <p className="line"></p>
+          </div>
+          <div>
+            <h4>Date</h4>
+            <p className="line"></p>
+          </div>
+        </div> */}
+
+        <div className="signage">
+          <div>
+            <h4>Final Approved by:</h4>
+            <p>
+              {lpo.finalApprover?.firstName} {lpo.finalApprover?.lastName}
+            </p>
+          </div>
+          <div>
+            <h4>Signature</h4>
+            <p className="line"></p>
+          </div>
+          <div>
+            <h4>Date</h4>
+            <p className="line"></p>
+          </div>
+        </div>
       </div>
     </div>
   );

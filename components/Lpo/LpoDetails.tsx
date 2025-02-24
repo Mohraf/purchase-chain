@@ -147,6 +147,10 @@ const LpoDetails: React.FC<LpoDetailsProps> = ({
                     display: block; // Ensures the image is displayed in print
                     margin: 0 auto; // Centers the image
                   }
+                    .signage {
+                      display: flex;
+                      justify-content: space-between;
+                    }
                 }
               </style>
             </head>

@@ -17,6 +17,7 @@ export async function GET() {
                     finalApprover: true,
                     secondApprover: true,
                     firstApprover: true,
+                    createdBy: true,
                 }
             });
             return NextResponse.json(lpos);
@@ -31,6 +32,7 @@ export async function GET() {
                     finalApprover: true,
                     secondApprover: true,
                     firstApprover: true,
+                    createdBy: true,
                 },
             });
             return NextResponse.json(lpos);

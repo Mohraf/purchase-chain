@@ -35,6 +35,8 @@ export default function PostedLposPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  console.log(lpos)
+
 
   return (
     <div className="container mx-auto h-full">
