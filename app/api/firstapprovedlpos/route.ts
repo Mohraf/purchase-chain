@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
-import {prisma} from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
     const session = await auth();
@@ -13,6 +13,10 @@ export async function GET() {
                 include: {
                     site: true, // Include site data
                     supplier: true,
+                    supplyItems: true,
+                    finalApprover: true,
+                    secondApprover: true,
+                    firstApprover: true,
                 }
             });
             return NextResponse.json(lpos);
@@ -23,6 +27,10 @@ export async function GET() {
                 include: {
                     site: true, // Include site data
                     supplier: true, // Include supplier data
+                    supplyItems: true,
+                    finalApprover: true,
+                    secondApprover: true,
+                    firstApprover: true,
                 },
             });
             return NextResponse.json(lpos);

@@ -35,21 +35,6 @@ export default function PostedLposPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  const getLpoStatus = (lpo: Lpo) => {
-    if (lpo.rejected === "YES") {
-      return "Rejected";
-    }
-    if (lpo.finalApproverId) {
-      return "Fully Approved";
-    }
-    if (lpo.secondApproverId) {
-      return "Second Approved";
-    }
-    if (lpo.firstApproverId) {
-      return "First Approved";
-    }
-    return "Pending";
-  };
 
   return (
     <div className="container mx-auto h-full">
